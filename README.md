@@ -19,7 +19,7 @@
 		PLAYLIST---(*)     (*)---TRACK(*)--------(1)SOURCE
 		(1)		           (1) 
 		 \			    /
-	          \			   /
+		  \                        /
 		   \                      /
 		    \                    /
 		    (*) PLAYLIST_TRACK (*)
