@@ -1,0 +1,23 @@
+
+<%= simple_form_for(@playlist) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :library_id, as: :hidden, input_html: { value: @library.id } %>
+    <%= f.input :title %>
+    <div class="links">
+      <%= f.simple_fields_for :tracks do |track| %>
+        <%= render 'track_fields', f: track %>
+      <% end %>
+      <span class="text-success">
+        <%=fa_icon "plus-circle"%>&nbsp;<%= link_to_add_association "add", f, :tracks %>
+      </span>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-primary" %>
+  </div>
+<% end %>
+<%= render partial: 'artists/artist_fields_modal' %>

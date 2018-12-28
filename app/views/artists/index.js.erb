@@ -1,0 +1,2 @@
+$("#artists").html("<%= j @artists.present? ? render(partial: 'artist', collection: @artists, locals: {show_add: true}) : 'no artists found' %>");
+$("#paginator").html("<%= j render(partial: 'pagination', locals: { artists: @artists }) %>");

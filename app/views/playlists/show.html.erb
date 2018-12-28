@@ -1,0 +1,8 @@
+
+<div class="my-3 p-3 bg-white rounded box-shadow">
+<h2><%= @playlist.title %></h2>
+<%= render partial: 'playlist_tracks/list', locals: { playlist_tracks: @playlist.playlist_tracks.includes(:track).page } %>
+<div>
+<%= link_to 'Edit', edit_playlist_path(@playlist) %> |
+<%= link_to 'Back', playlists_path %>
+</div>

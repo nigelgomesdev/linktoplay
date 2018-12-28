@@ -1,0 +1,11 @@
+<% if @artist.errors.empty? %>
+	$("#add-artist-form").html("<%= j render(partial: 'form', locals: { artist: Artist.new, remote: true } ) %>");
+	$("#add-artist-form").hide();
+	$("#add-artist-done").html("<div class='list-group' id='artists'><%= j render(partial: 'artist', locals: { artist: @artist, show_add: true }) %></div>");	
+	$("#add-artist-done").show();
+<% else %>
+	$("#add-artist-form").html("<%= j render(partial: 'form', locals: { artist: @artist, remote: true } ) %>");
+	$("#add-artist-form").show();
+	$("#add-artist-done").html("");
+	$("#add-artist-done").hide();	
+<% end %>

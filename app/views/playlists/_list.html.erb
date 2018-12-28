@@ -1,0 +1,26 @@
+<div class="d-inline-block"><h2>Playlists</h2></div>
+<div class="d-inline-block float-right">
+  <div class="dropdown dropleft">
+    <button class="btn dropdown-toggle" type="button" id="sortDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort By</button>
+    <div class="dropdown-menu" aria-labelledby="sortDropdown">
+      <%= link_to "Title", playlists_path("q[title_ordered_by]": "asc"), class: "dropdown-item" %>
+      <%= link_to "Recently added", playlists_path("q[updated_at_ordered_by]": "desc"), 
+      class: "dropdown-item" %>
+    </div>
+  </div>
+</div>
+<div id="paginator">
+  <%= render partial: 'playlists/pagination', locals: { playlists: playlists } %>
+</div>
+<% if playlists.present? %>
+<div class="list-group" id="playlists">
+  <%= render playlists %>
+</div>
+<% else %>
+<div> 0 playlists found</div>
+<% end %>
+<div class="row">
+  <div class="col-md-12">
+    <span class="pull-right"><%= link_to 'New Playlist', new_playlist_path %></span>
+  </div>
+</div>

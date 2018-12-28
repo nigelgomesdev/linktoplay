@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Linktoplay</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
-    <%= yield %>
+  <%= render partial: 'layouts/header' %>
+  <body class="bg-light">
+    <%= render partial: 'layouts/navigation' %>
+    <% if flash.notice.present? %>
+      <div class="alert alert-success" role="alert">
+        <%= flash.notice %>
+    </div>
+    <% end %>
+    <% if flash.alert.present? %>
+      <div class="alert alert-danger" role="alert">
+        <%= flash.alert %>
+    </div>
+    <% end %>
+    
+    <main role="main" class="container mx-auto">
+      <%= yield %>
+    </main>
   </body>
 </html>

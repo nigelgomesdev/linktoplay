@@ -1,0 +1,52 @@
+<div class="modal fade" id="addArtistModal" tabindex="-1" role="dialog" aria-labelledby="addArtistModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addArtistModalLabel">Choose Artist</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="select-artist-tab" data-toggle="tab" href="#select-artist" role="tab" aria-controls="select-artist" aria-selected="true">Select</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="add-artist-tab" data-toggle="tab" href="#add-artist" role="tab" aria-controls="add-artist" aria-selected="false">Add New</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="select-artist" role="tabpanel" aria-labelledby="select-artist-tab">
+            <%= render partial: 'artists/list_modal', locals: { artists: Artist.none.page(0) } %>
+          </div>
+          <div class="tab-pane fade" id="add-artist" role="tabpanel" aria-labelledby="add-artist-tab">
+            <div id="add-artist-form">
+              <%= render partial: 'artists/form', locals: { artist: Artist.new, remote: true } %>
+            </div>
+            <div id="add-artist-done">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('#addArtistModal').on('show.bs.modal', function (e) {
+    if($(".artist-input-selected").length){
+      $(".artist-input-selected").removeClass('artist-input-selected');
+    }
+    $(e.relatedTarget).closest('.input-group').addClass('artist-input-selected');
+  });
+  $('#addArtistModal').on('click', '.list-group-item', function(){
+    $('.artist-input-selected').find('.artist-fullname-input').val($(this).data('artist-fullname'));
+    $('.artist-input-selected').find('.artist-id-input').val($(this).data('artist-id'));
+    $("#addArtistModal").modal("hide"); 
+  });
+  $('#addArtistModal').on('hidden.bs.modal', function (e) {
+    $("#add-artist-form").show();
+    $("#add-artist-done").hide();
+  });
+</script>

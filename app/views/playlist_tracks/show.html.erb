@@ -1,0 +1,13 @@
+
+<p>
+  <strong>Playlist:</strong>
+  <%= @playlist_track.playlist %>
+</p>
+
+<p>
+  <strong>Track:</strong>
+  <%= @playlist_track.track %>
+</p>
+
+<%= link_to 'Edit', edit_playlist_track_path(@playlist_track) %> |
+<%= link_to 'Back', playlist_tracks_path %>

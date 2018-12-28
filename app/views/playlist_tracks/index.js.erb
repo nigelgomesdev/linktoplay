@@ -1,0 +1,2 @@
+$("#playlist_tracks").html("<%= j render(@playlist_tracks.includes(:track)) %>");
+$("#paginator").html("<%= j render(partial: 'playlist_tracks/pagination', locals: { playlist_tracks: @playlist_tracks.includes(:track) }) %>");

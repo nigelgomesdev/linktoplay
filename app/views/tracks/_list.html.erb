@@ -1,0 +1,29 @@
+<div class="d-inline-block"><h2>Tracks</h2></div>
+<div class="d-inline-block float-right">
+  <div class="dropdown dropleft">
+    <button class="btn dropdown-toggle" type="button" id="sortDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort By</button>
+    <div class="dropdown-menu" aria-labelledby="sortDropdown">
+      <%= link_to "Title", tracks_path("q[title_ordered_by]": "asc"), class: "dropdown-item" %>
+      <%= link_to "Recently added", tracks_path("q[updated_at_ordered_by]": "desc"), 
+      class: "dropdown-item" %>
+      <%= link_to "Popular", tracks_path("q[views_ordered_by]": "desc"), class: "dropdown-item" %>
+    </div>
+  </div>
+</div>
+<div id="paginator">
+  <%= render partial: 'tracks/pagination', locals: { tracks: tracks } %>
+</div>
+<% if tracks.present? %>
+<ul class="list-unstyled" id="tracks">
+  <%= render tracks %>
+</ul>
+<% else %>
+<div> 0 tracks found</div>
+<% end %>
+<div class="row">
+  <div class="col-md-12">
+    <span class="pull-right"><%= link_to 'New Track', new_track_path %></span>
+  </div>
+</div>
+
+  

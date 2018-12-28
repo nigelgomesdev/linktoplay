@@ -1,0 +1,12 @@
+<div class="card my-3">
+  <div class="card-header">
+  <h1>Editing Playlist</h1>
+  </div>
+  <div class="card-body">
+  <%= render 'form', playlist: @playlist %>
+  </div>
+  <div class="card-footer">
+  <%= link_to 'Show', @playlist %> | 
+  <%= link_to 'Back', playlists_path %>
+  </div>
+</div>

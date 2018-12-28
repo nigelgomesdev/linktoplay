@@ -1,0 +1,18 @@
+
+<p>
+  <strong>Title:</strong>
+  <%= @source.title %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @source.status %>
+</p>
+
+<p>
+  <strong>Domain:</strong>
+  <%= @source.domain %>
+</p>
+
+<%= link_to 'Edit', edit_source_path(@source) %> |
+<%= link_to 'Back', sources_path %>

@@ -1,0 +1,10 @@
+<div class="jumbotron">
+  <h1 class="display-4">Hello </h1>
+  <p class="lead">Welcome to <i>Link 2 Play</i></p>
+  <hr class="my-4">
+  <p>Your library is empty!,</p>
+  <%= simple_form_for Library.new do |f| %>
+    <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+    <%= f.submit "Lets get started", class: "btn btn-primary btn-lg" %>
+  <% end %>
+</div>

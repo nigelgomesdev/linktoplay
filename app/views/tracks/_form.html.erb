@@ -1,0 +1,27 @@
+<% form_path = @playlist.present? ? [@playlist, @track] : @track %>
+<%= simple_form_for(form_path) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+  <%= f.input :library_id, as: :hidden, input_html: { value: @library.id } %>
+  <% if params[:playlist_id].present? %>
+    <%= f.association :playlists, selected: params[:playlist_id] %>
+  <% end %>
+  <%= f.input :title %>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <button type="button" class="btn btn-outline-secondary form-control" data-toggle="modal" data-target="#addArtistModal" data-target-input="">Add</button>
+      </div>
+      <%= f.association :artist, as: :string, label: false, readonly: true,
+        input_html: {value: f.object.artist.try(:fullname), class: "artist-fullname-input"} %>
+      <%= f.hidden_field :artist_id, value: f.object.artist_id, class: "artist-id-input" %>
+    </div>
+    <%= f.input :genre, collection: Track::genres.values, prompt: "Select Genre" %>
+    <%= f.input :source_link %>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+<%= render partial: 'artists/artist_fields_modal' %>

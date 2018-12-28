@@ -1,0 +1,27 @@
+<div class="d-inline-block"><h2>Playlist Tracks</h2></div>
+<div class="d-inline-block float-right">
+  <div class="dropdown dropleft">
+    <button class="btn dropdown-toggle" type="button" id="sortDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort By</button>
+    <div class="dropdown-menu" aria-labelledby="sortDropdown">
+      <%= link_to "Title", playlist_playlist_tracks_path(playlist_tracks.first.try(:playlist_id), "q[title_ordered_by]": "asc"), class: "dropdown-item", remote: true %>
+      <%= link_to "Recently added", playlist_playlist_tracks_path(playlist_tracks.first.try(:playlist_id), "q[updated_at_ordered_by]": "desc"), 
+      class: "dropdown-item", remote: true %>
+      <%= link_to "Popular", playlist_playlist_tracks_path(playlist_tracks.first.try(:playlist_id), "q[views_ordered_by]": "desc"), class: "dropdown-item", remote: true %>
+    </div>
+  </div>
+</div>
+<div id="paginator">
+  <%= render partial: 'playlist_tracks/pagination', locals: { playlist_tracks: playlist_tracks } %>
+</div>
+<% if playlist_tracks.present? %>
+<ul class="list-unstyled" id="playlist_tracks">
+  <%= render playlist_tracks %>
+</ul>
+<% else %>
+<div> 0 tracks found</div>
+<% end %>
+<div class="row">
+  <div class="col-md-12">
+    <span class="pull-right"><%= link_to 'Add To Playlist', new_playlist_track_path(playlist_tracks.first.try(:playlist_id)) %></span>
+  </div>
+</div>

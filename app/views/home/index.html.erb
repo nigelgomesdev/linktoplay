@@ -1,0 +1,5 @@
+<% if @first_library.present? %>
+  <%= render partial: 'recent_activity' %>
+<% else %>
+  <%= render partial: 'welcome' %>
+<% end %>

@@ -1,0 +1,4 @@
+<% show_add = false if local_assigns[:show_add].nil? %>
+<div class="list-group-item" data-artist-id="<%= artist.id %>" data-artist-fullname="<%= artist.fullname %>">
+  <%= artist.fullname %><% if show_add %>&nbsp;<button type="button" class="btn btn-primary btn-sm pull-right">add</button><% end %>
+</div>

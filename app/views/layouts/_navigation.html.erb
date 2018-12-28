@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">
+  <%=fa_icon "external-link-square"%>&nbsp;Link 2 Play</a>
+      <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <%= link_to(root_path, class: "nav-link") do %>
+            <%=fa_icon "home"%>&nbsp;Home
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to(new_playlist_path, class: "nav-link") do %>
+            <%=fa_icon "plus-square"%>&nbsp;New Playlist
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to(playlists_path, class: "nav-link") do %>
+            <%=fa_icon "list"%>&nbsp;Playlists
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to(tracks_path, class: "nav-link") do %>
+            <%=fa_icon "music"%>&nbsp;Tracks
+            <% end %>
+          </li>
+          <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to(destroy_user_session_path, method: :delete, class: "nav-link") do %>
+            <%=fa_icon "power-off"%>&nbsp;Logout
+            <% end %>
+          </li>
+          <% else %>
+          <li class="nav-item">
+            <%= link_to(new_user_session_path, class: "nav-link") do %>
+            <%=fa_icon "user-circle"%>&nbsp;Log In
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to(new_user_registration_path, class: "nav-link") do %>
+            <%=fa_icon "paper-plane"%>&nbsp;Sign Up
+            <% end %>
+          </li>
+          <% end %> 
+        </ul>
+        <form action="/search_type" method="get" class="form-inline my-2 my-lg-0">
+          <div class="input-group">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search_type[q[title_like]]">
+            <div class="input-group-append">
+              <select class="custom-select" id="searchSelect" name="search_type[type]">
+                <option value="playlists">Playlists</option>
+                <option value="tracks">Tracks</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-outline-success" type="submit">Go</button>
+        </form>
+      </div>
+    </nav>

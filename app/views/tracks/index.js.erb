@@ -1,0 +1,2 @@
+$("#tracks").html("<%= j render(@tracks) %>");
+$("#paginator").html("<%= j render(partial: 'pagination', locals: { tracks: @tracks }) %>");

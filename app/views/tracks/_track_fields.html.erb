@@ -1,0 +1,24 @@
+<div class="nested-fields border border-warning">
+  <div class="row">
+    <div class="col-md-6">
+      <legend class="legend">Track</legend>
+    </div>
+    <div class="col-md-6">
+      <span class="pull-right text-danger">
+        <%=fa_icon "minus-circle"%>&nbsp;<%= link_to_remove_association "remove", f %>
+      </span>
+    </div>
+  </div>
+  <%= f.input :library_id, as: :hidden, input_html: { value: @library.id } %>
+  <%= f.input :title %>
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <button type="button" class="btn btn-outline-secondary form-control" data-toggle="modal" data-target="#addArtistModal" data-target-input="">Add</button>
+    </div>
+    <%= f.association :artist, as: :string, label: false, readonly: true,
+      input_html: {value: f.object.artist.try(:fullname), class: "artist-fullname-input"} %>
+    <%= f.hidden_field :artist_id, value: f.object.artist_id, class: "artist-id-input" %>
+  </div>
+  <%= f.input :genre, collection: Track::genres.values, prompt: "Select Genre" %>
+  <%= f.input :source_link %>
+</div>

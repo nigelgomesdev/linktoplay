@@ -1,0 +1,18 @@
+<div>
+  <form action="/artists" method="get" class="form-inline my-2 my-lg-0" data-remote=true>
+    <div class="input-group">
+      <input class="form-control mr-sm-2" type="text" , placeholder="Type 'art' and press Go", name="q[fullname_like]">
+      <div class="input-group-append">
+          <button class="btn btn-outline-success" type="submit">Go</button>  
+      </div>
+    </div>   
+  </form>
+</div>
+<div id="paginator">
+  <%= render partial: 'artists/pagination', locals: { artists: artists } %>
+</div>
+<div class="list-group" id="artists">
+  <% if artists.present? %>
+    <%= render 'artists/artist', locals: { artists: artists, show_add: true } %>
+  <% end %>
+</div>

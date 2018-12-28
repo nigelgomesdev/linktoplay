@@ -1,0 +1,2 @@
+$("#playlists").html("<%= j render(@playlists) %>");
+$("#paginator").html("<%= j render(partial: 'pagination', locals: { playlists: @playlists }) %>");

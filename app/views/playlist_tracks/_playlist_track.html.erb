@@ -1,0 +1,22 @@
+<% track = playlist_track.track %>
+<li class="media">
+  <%= link_to(track_path(track), class: "list-group-item list-group-item-action") do %>
+  <%= fa_icon "music 2x", class: "float-left mr-3" %>
+  <div class="media-body">
+    <span class="mt-0 mb-1"><%= track.title %></span>
+    <% if track.genre.present? %>
+      <span class="badge badge-info"><i><%= track.genre.camelcase %></span></i></span>
+    <% end %>
+  </div>
+  <% end %>
+
+  <div class="pull-right ml-3">
+    <div class="dropdown dropleft">
+      <button class="btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= fa_icon "ellipsis-v" %></button>
+      <div class="dropdown-menu">
+        <%= link_to "Edit Track", edit_track_path(track), class: "dropdown-item" %>
+        <%= link_to 'Remove from Playlist', playlist_playlist_track_path(playlist_track.playlist_id, playlist_track.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>
+      </div>
+    </div>
+  </div>
+</li>
