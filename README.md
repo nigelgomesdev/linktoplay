@@ -11,18 +11,19 @@
 	-Source has many tracks
 	
 
-					 USER(1)---(*)LIBRARY	  ARTIST
-									(1)         (1)
-									/\		     |
-								   /  \			 |
-								  /	   \		(*)
-					 PLAYLIST---(*)     (*)---TRACK(*)--------(1)SOURCE
-						 (1)				 (1) 
-						   \			     /
-							\				/
-							 \			   /
-							  (*)         (*)
-							  PLAYLIST_TRACK  
+		USER(1)---(*)LIBRARY	  ARTIST
+			      (1)         (1)
+			       /\          |
+			      /  \         |
+			     /    \	  (*)
+		PLAYLIST---(*)     (*)---TRACK(*)--------(1)SOURCE
+		(1)		           (1) 
+		 \			    /
+	          \			   /
+		   \                      /
+		    \                    /
+		    (*) PLAYLIST_TRACK (*)
+			  
 
 
 * System dependencies
