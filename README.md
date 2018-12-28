@@ -2,7 +2,15 @@
 
 * Scope: Music library with Playlist, Tracks and ability to link to third party websites.
 
-* ERD:
+* ER Specification:
+	-User has many libraries
+	-Library has many Tracks
+	-Library has many Playlists
+	-Playlist has many tracks (through PlaylistTrack)
+	-Artist has many tracks
+	-Source has many tracks
+	
+
 					 USER(1)---(*)LIBRARY	  ARTIST
 									(1)         (1)
 									/\		     |
