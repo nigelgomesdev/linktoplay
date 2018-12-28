@@ -1,24 +1,39 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Scope: Music library with Playlist, Tracks and ability to link to third party websites.
 
-Things you may want to cover:
+* ERD:
+					 USER(1)---(*)LIBRARY	  ARTIST
+									(1)         (1)
+									/\		     |
+								   /  \			 |
+								  /	   \		(*)
+					 PLAYLIST---(*)     (*)---TRACK(*)--------(1)SOURCE
+						 (1)				 (1) 
+						   \			     /
+							\				/
+							 \			   /
+							  (*)         (*)
+							  PLAYLIST_TRACK  
 
-* Ruby version
 
 * System dependencies
+	- Postgres(9.5)
+	- Ruby(2.5.3)
+	- Rails(5.2.2)
 
 * Configuration
+	- Devise, Simple form, Kaminari
 
-* Database creation
-
-* Database initialization
+* Database Initialization
+	- rails db:reset
 
 * How to run the test suite
+	- #TODO
 
 * Services (job queues, cache servers, search engines, etc.)
+	- None
 
 * Deployment instructions
+	- Heroku
 
-* ...
