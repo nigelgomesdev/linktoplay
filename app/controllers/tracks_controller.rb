@@ -72,7 +72,7 @@ class TracksController < ApplicationController
       .first
     if previous_track.present?
       redirect_to track_path(previous_track)
-    else from playlist
+    else
       flash[:notice] = 'No previous track found'
       render :show 
     end
