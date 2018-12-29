@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -14,7 +16,7 @@
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #
-
+# User
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -23,7 +25,7 @@ class User < ApplicationRecord
          :confirmable
   has_one :library
   has_many :libraries
-  has_many :playlists, through: :libraries 
+  has_many :playlists, through: :libraries
   has_many :tracks, through: :libraries
   has_many :playlist_tracks, through: :playlists
 end

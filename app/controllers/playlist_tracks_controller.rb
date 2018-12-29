@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
+# PlaylistTracksController
 class PlaylistTracksController < ApplicationController
-  before_action :set_playlist_track, only: [:show, :edit, :update, :destroy]
+  before_action :set_playlist_track, only: %i[show edit update destroy]
   before_action :set_playlist
   load_and_authorize_resource
 
@@ -15,8 +18,7 @@ class PlaylistTracksController < ApplicationController
 
   # GET /playlist_tracks/1
   # GET /playlist_tracks/1.json
-  def show
-  end
+  def show; end
 
   # GET /playlist_tracks/new
   def new
@@ -24,8 +26,7 @@ class PlaylistTracksController < ApplicationController
   end
 
   # GET /playlist_tracks/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /playlist_tracks
   # POST /playlist_tracks.json
@@ -68,21 +69,22 @@ class PlaylistTracksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_playlist_track
-      @playlist_track = PlaylistTrack.find(params[:id])
-    end
 
-    def set_playlist
-      @playlist = Playlist.find(params[:playlist_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_playlist_track
+    @playlist_track = PlaylistTrack.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def playlist_track_params
-      params.require(:playlist_track).permit(:playlist_id, :track_id)
-    end
+  def set_playlist
+    @playlist = Playlist.find(params[:playlist_id])
+  end
 
-    def search_params
-      params[:q] || {}
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def playlist_track_params
+    params.require(:playlist_track).permit(:playlist_id, :track_id)
+  end
+
+  def search_params
+    params[:q] || {}
+  end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: sources
@@ -9,10 +11,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-
+# Source
 class Source < ApplicationRecord
-enum status: { 
-    active: "active",
-    blocked: "blocked"
-  }
+  enum status: { active: 'active', blocked: 'blocked' }
 end

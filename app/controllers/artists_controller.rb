@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
+# ArtistsController
 class ArtistsController < ApplicationController
-  before_action :set_artist, only: [:show, :edit, :update, :destroy]
+  before_action :set_artist, only: %i[show edit update destroy]
 
   # GET /artists
   # GET /artists.json
@@ -9,8 +12,7 @@ class ArtistsController < ApplicationController
 
   # GET /artists/1
   # GET /artists/1.json
-  def show
-  end
+  def show; end
 
   # GET /artists/new
   def new
@@ -18,24 +20,19 @@ class ArtistsController < ApplicationController
   end
 
   # GET /artists/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /artists
   # POST /artists.json
   def create
     @artist = Artist.new(artist_params)
-
     respond_to do |format|
       if @artist.save
         format.html { redirect_to @artist, notice: 'Artist was successfully created.' }
-        format.json { render :show, status: :created, location: @artist }
-        format.js
       else
         format.html { render :new }
-        format.json { render json: @artist.errors, status: :unprocessable_entity }
-        format.js
       end
+      format.js
     end
   end
 
@@ -64,17 +61,18 @@ class ArtistsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_artist
-      @artist = Artist.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def artist_params
-      params.require(:artist).permit(:fullname)
-    end
-    
-    def search_params
-      params[:q] || {}
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_artist
+    @artist = Artist.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def artist_params
+    params.require(:artist).permit(:fullname)
+  end
+
+  def search_params
+    params[:q] || {}
+  end
 end

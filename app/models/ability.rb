@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Ability
 class Ability
   include CanCan::Ability
 
@@ -38,6 +41,6 @@ class Ability
     end
     can :manage, PlaylistTrack, PlaylistTrack.playlist_tracks_for_user(user.id) do |playlist_track|
       playlist_track.present?
-    end 
+    end
   end
 end

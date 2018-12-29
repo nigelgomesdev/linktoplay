@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: tracks
@@ -14,7 +16,7 @@
 #  updated_at  :datetime         not null
 #  library_id  :bigint(8)
 #
-
+# Track
 class Track < ApplicationRecord
   include Scopable
 
@@ -23,16 +25,16 @@ class Track < ApplicationRecord
   belongs_to :source, optional: true
   has_many :playlist_tracks, dependent: :destroy
   has_many :playlists, through: :playlist_tracks
-  
-  enum status: { 
-    active: "active",
-    blocked: "blocked"
+
+  enum status: {
+    active: 'active',
+    blocked: 'blocked'
   }
   enum genre: {
-    pop: "pop",
-    rock: "rock",
-    jazz: "jazz",
-    country: "country"
+    pop: 'pop',
+    rock: 'rock',
+    jazz: 'jazz',
+    country: 'country'
   }
 
   validates :title, presence: true
@@ -41,20 +43,22 @@ class Track < ApplicationRecord
 
   before_validation :set_source
 
-  scope :title_ordered_by, -> (direction) { order(title: direction) }
-  scope :updated_at_ordered_by, -> (direction) { order(updated_at: direction) }
-  scope :views_ordered_by, -> (direction) { order(views: direction) }
+  scope :title_ordered_by, ->(direction) { order(title: direction) }
+  scope :updated_at_ordered_by, ->(direction) { order(updated_at: direction) }
+  scope :views_ordered_by, ->(direction) { order(views: direction) }
   scope :popularity, -> { views_ordered_by(:desc) }
-  scope :title_like, -> (str) { where("lower(title) like ?", "%#{str.downcase}%") }
+  scope :title_like, ->(str) { where('lower(title) like ?', "%#{str.downcase}%") }
   scope :recent, -> { updated_at_ordered_by(:desc) }
-  scope :previous_tracks, -> (date) { where("created_at > ?", date).order(created_at: :desc) }
-  scope :next_tracks, -> (date) { where("created_at < ?", date).order(:created_at) }
-  scope :tracks_for_user, -> (user_id) { where(library_id: Library.where(user_id: user_id).try(:pluck,:id)) }
+  scope :previous_tracks, ->(date) { where('created_at > ?', date).order(created_at: :desc) }
+  scope :next_tracks, ->(date) { where('created_at < ?', date).order(:created_at) }
+  scope :tracks_for_user, ->(user_id) { where(library_id: Library.where(user_id: user_id).try(:pluck, :id)) }
 
   delegate :user, to: :library
+
   private
+
   def set_source
-    uri = URI.parse(self.source_link)
+    uri = URI.parse(source_link)
     self.source = Source.where(domain: uri.host).first
   end
 end

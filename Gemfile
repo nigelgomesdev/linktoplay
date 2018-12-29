@@ -57,6 +57,7 @@ group :development, :test do
   gem 'annotate'
   gem 'letter_opener'
   gem 'bullet'
+  gem 'rubocop'
 end
 
 group :development do

@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
+# PlaylistsController
 class PlaylistsController < ApplicationController
-  before_action :set_playlist, only: [:show, :edit, :update, :destroy]
+  before_action :set_playlist, only: %i[show edit update destroy]
   before_action :set_library
   load_and_authorize_resource
 
@@ -7,24 +10,23 @@ class PlaylistsController < ApplicationController
   # GET /playlists.json
   def index
     @playlists = Playlist.accessible_by(current_ability)
-      .scoped(search_params)
-      .page(params[:page])
+                         .includes(:tracks)
+                         .scoped(search_params)
+                         .page(params[:page])
   end
 
   # GET /playlists/1
   # GET /playlists/1.json
-  def show
-  end
+  def show; end
 
   # GET /playlists/new
   def new
     @playlist = Playlist.new
-    @playlist.tracks.build()
+    @playlist.tracks.build
   end
 
   # GET /playlists/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /playlists
   # POST /playlists.json
@@ -35,7 +37,6 @@ class PlaylistsController < ApplicationController
         format.html { redirect_to @playlist, notice: 'Playlist was successfully created.' }
         format.json { render :show, status: :created, location: @playlist }
       else
-        puts "------------",@playlist.errors.inspect
         format.html { render :new }
         format.json { render json: @playlist.errors, status: :unprocessable_entity }
       end
@@ -67,22 +68,25 @@ class PlaylistsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_playlist
-      @playlist = Playlist.find(params[:id])
-    end
 
-    def set_library
-      @library = current_user.try(:library)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_playlist
+    @playlist = Playlist.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def playlist_params
-      params.require(:playlist).permit(:title, :status, :views, :library_id,
-        tracks_attributes: [:id, :title, :artist_id, :genre, :source_link, :library_id])
-    end
+  def set_library
+    @library = current_user.try(:library)
+  end
 
-    def search_params
-      params[:q] || {}
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def playlist_params
+    params.require(:playlist).permit(
+      :title, :status, :views, :library_id,
+      tracks_attributes: [:id, :title, :artist_id, :genre, :source_link, :library_id]
+    )
+  end
+
+  def search_params
+    params[:q] || {}
+  end
 end
