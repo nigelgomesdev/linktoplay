@@ -6,7 +6,7 @@
   <div class="form-inputs">
   <%= f.input :library_id, as: :hidden, input_html: { value: @library.id } %>
   <% if params[:playlist_id].present? %>
-    <%= f.association :playlists, selected: params[:playlist_id] %>
+    <%= f.association :playlists, collection: Playlist.accessible_by(current_ability).pluck(:title, :id), selected: params[:playlist_id] %>
   <% end %>
   <%= f.input :title %>
     <div class="input-group">
