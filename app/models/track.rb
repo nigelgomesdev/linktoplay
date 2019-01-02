@@ -41,7 +41,7 @@ class Track < ApplicationRecord
   validates :artist, presence: true
   validates :source_link, presence: true
 
-  before_validation :set_source
+  before_save :set_source
 
   scope :title_ordered_by, ->(direction) { order(title: direction) }
   scope :updated_at_ordered_by, ->(direction) { order(updated_at: direction) }
@@ -49,8 +49,8 @@ class Track < ApplicationRecord
   scope :popularity, -> { views_ordered_by(:desc) }
   scope :title_like, ->(str) { where('lower(title) like ?', "%#{str.downcase}%") }
   scope :recent, -> { updated_at_ordered_by(:desc) }
-  scope :previous_tracks, ->(date) { where('created_at > ?', date).order(created_at: :desc) }
-  scope :next_tracks, ->(date) { where('created_at < ?', date).order(:created_at) }
+  scope :previous_tracks, ->(date) { where('created_at < ?', date).order(created_at: :desc) }
+  scope :next_tracks, ->(date) { where('created_at > ?', date).order(:created_at) }
   scope :tracks_for_user, ->(user_id) { where(library_id: Library.where(user_id: user_id).try(:pluck, :id)) }
 
   delegate :user, to: :library
@@ -59,6 +59,6 @@ class Track < ApplicationRecord
 
   def set_source
     uri = URI.parse(source_link)
-    self.source = Source.where(domain: uri.host).first
+    self.source = Source.find_by(domain: uri.host)
   end
 end

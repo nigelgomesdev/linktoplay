@@ -16,6 +16,9 @@ class PlaylistTrack < ApplicationRecord
   belongs_to :playlist, inverse_of: :playlist_tracks
   belongs_to :track, inverse_of: :playlist_tracks
 
+  validates :playlist_id, presence: true
+  validates :track_id, presence: true
+
   scope :title_ordered_by, ->(direction) { joins(:track).merge(Track.title_ordered_by(direction)) }
   scope :updated_at_ordered_by, ->(direction) { joins(:track).merge(Track.updated_at_ordered_by(direction)) }
   scope :views_ordered_by, ->(direction) { joins(:track).merge(Track.views_ordered_by(direction)) }
