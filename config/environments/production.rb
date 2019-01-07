@@ -85,7 +85,7 @@ Rails.application.configure do
 
 
   config.action_mailer.default_url_options = { host: 'blooming-atoll-27087.herokuapp.com', port: 443 }
-  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.delivery_method = :letter_opener_web
   config.action_mailer.perform_deliveries = true
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
