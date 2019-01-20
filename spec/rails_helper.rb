@@ -69,4 +69,7 @@ RSpec.configure do |config|
       with.library :rails
     end
   end
+
+  #REF: https://medium.com/@ssscripting/devise-could-not-find-the-warden-proxy-instance-on-your-request-environment-fae1acb32a4
+  config.include Devise::Test::ControllerHelpers, type: :controller
 end
